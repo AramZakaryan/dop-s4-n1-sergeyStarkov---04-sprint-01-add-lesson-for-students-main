@@ -26,6 +26,9 @@ type fetchDecksType = {
   }
 }
 
+export type AddDeckParamsType = {
+  name:string
+}
 
 export const instance = axios.create({
   baseURL: 'https://api.flashcards.andrii.es',
@@ -38,4 +41,7 @@ export const decksAPI = {
   fetchDecks() {
     return instance.get<fetchDecksType>('/v2/decks')
   },
+  addDeck (params: AddDeckParamsType) {
+    return instance.post<DeckType>("/v1/decks", params)
+  }
 }
