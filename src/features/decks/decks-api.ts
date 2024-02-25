@@ -1,23 +1,23 @@
 import axios from 'axios'
 
 
+export type DeckType = {
+  author: {
+    id: string
+    name: string
+  }
+  id: string
+  userId: string
+  name: string
+  isPrivate: true
+  cover: string
+  created: string
+  updated: string
+  cardsCount: number
+}
+
 type fetchDecksType = {
-  items: [
-    {
-      author: {
-        id: string
-        name: string
-      },
-      id: string
-      userId: string
-      name: string
-      isPrivate: true
-      cover: string
-      created: string
-      updated: string
-      cardsCount: number
-    }
-  ],
+  items: DeckType      []
   pagination: {
     currentPage: number
     itemsPerPage: number
@@ -25,6 +25,7 @@ type fetchDecksType = {
     totalItems: number
   }
 }
+
 
 export const instance = axios.create({
   baseURL: 'https://api.flashcards.andrii.es',
@@ -34,5 +35,7 @@ export const instance = axios.create({
 })
 
 export const decksAPI = {
-  fetchDecks: instance.get<fetchDecksType>("/v2/decks")
+  fetchDecks() {
+    return instance.get<fetchDecksType>('/v2/decks')
+  },
 }
